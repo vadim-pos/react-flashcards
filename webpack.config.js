@@ -21,7 +21,14 @@ let plugins = [
 ];
 
 if (isProduction) {
-	plugins.push(new webpack.optimize.UglifyJsPlugin());
+	plugins.push(
+		new webpack.DefinePlugin({
+			'process.env': {
+				NODE_ENV: JSON.stringify('production')
+			}
+		}),
+		new webpack.optimize.UglifyJsPlugin()
+	);
 }
 
 module.exports = {
